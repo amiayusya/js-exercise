@@ -110,7 +110,7 @@ fetch(requestUrl).then(response => response.json())
 
         // Part 1E: Display each daytime forecast nicely
         daytimePeriods.forEach(function(period) {
-            console.log(⁠ ${period.name}: ${period.temperature}${degreeSymbol}${period.temperatureUnit}, ${period.shortForecast} ⁠);
+            console.log(`${period.name}: ${period.temperature}${degreeSymbol}${period.temperatureUnit}, ${period.shortForecast}`);
         });
 
         console.log("---------------------");
@@ -140,7 +140,7 @@ fetch(requestUrl).then(response => response.json())
             periodCell.textContent = period.name;
 
             var tempCell = document.createElement("td");
-            tempCell.textContent = ⁠ ${period.temperature}${degreeSymbol}${period.temperatureUnit} ⁠;
+            tempCell.textContent = `${period.temperature}${degreeSymbol}${period.temperatureUnit}`;
 
             var forecastCell = document.createElement("td");
             forecastCell.textContent = period.shortForecast || period.detailedForecast;
