@@ -73,63 +73,64 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<script type="text/javascript">
-
-    // AVOID HARD-CODING THE CREDENTIALS
-    var apiKey = sessionStorage.getItem("ALPHAVANTAGE_API_KEY")
-    if (!apiKey) {
-        apiKey = prompt("Please enter your AlphaVantage API key:");
-        sessionStorage.setItem("ALPHAVANTAGE_API_KEY", apiKey);
-    }
-
-    // FUNCTION DEFINITION
-    function lookupCompany() {
-        var inputSymbol = document.getElementById("input-symbol");
-        var symbol = inputSymbol.value.trim(); // get input value safely
-        console.log("SYMBOL:", symbol);
-
-        var requestUrl = ⁠ https://www.alphavantage.co/query?function=OVERVIEW&symbol=${symbol}&apikey=${apiKey} ⁠;
-
-        d3.json(requestUrl).then(function(data) {
-            console.log("RESPONSE:", data);
-
-            console.log("---------------------");
-            console.log("PART 1...");
-
-            // PART 1: Console log the company info
-            console.log("Name:", data.Name);
-            console.log("Description:", data.Description);
-            console.log("Website:", data.Website);
-
-            console.log("---------------------");
-            console.log("PART 2...");
-
-            // PART 2: Display the company info on the page
-            document.getElementById("display-name").textContent = data.Name || "N/A";
-            document.getElementById("display-description").textContent = data.Description || "N/A";
-            
-            var linkElement = document.getElementById("display-link");
-            if (data.Website) {
-                linkElement.href = data.Website;
-                linkElement.textContent = data.Website;
-            } else {
-                linkElement.href = "#";
-                linkElement.textContent = "N/A";
-            }
-
-        }).catch(function(error) {
-            console.error("ERROR:", error);
-        });
-    }
-
-    // FUNCTION INVOCATIONS
-    // invoke function when the page loads:
-    lookupCompany();
-
-    // invoke function when button is clicked:
-    var lookupButton = document.getElementById("lookup");
-    lookupButton.addEventListener("click", lookupCompany, false);
-
-</script>
+    <script type="text/javascript">
+    
+        // AVOID HARD-CODING THE CREDENTIALS
+        var apiKey = sessionStorage.getItem("ALPHAVANTAGE_API_KEY")
+        if (!apiKey) {
+            apiKey = prompt("Please enter your AlphaVantage API key:");
+            sessionStorage.setItem("ALPHAVANTAGE_API_KEY", apiKey);
+        }
+    
+        // FUNCTION DEFINITION
+        function lookupCompany() {
+            var inputSymbol = document.getElementById("input-symbol");
+            var symbol = inputSymbol.value.trim(); // get input value safely
+            console.log("SYMBOL:", symbol);
+    
+            var requestUrl = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${symbol}&apikey=${apiKey}`;
+    
+            d3.json(requestUrl).then(function(data) {
+                console.log("RESPONSE:", data);
+    
+                console.log("---------------------");
+                console.log("PART 1...");
+    
+                // PART 1: Console log the company info
+                console.log("Name:", data.Name);
+                console.log("Description:", data.Description);
+                console.log("Website:", data.Website);
+    
+                console.log("---------------------");
+                console.log("PART 2...");
+    
+                // PART 2: Display the company info on the page
+                document.getElementById("display-name").textContent = data.Name || "N/A";
+                document.getElementById("display-description").textContent = data.Description || "N/A";
+                
+                var linkElement = document.getElementById("display-link");
+                if (data.Website) {
+                    linkElement.href = data.Website;
+                    linkElement.textContent = data.Website;
+                } else {
+                    linkElement.href = "#";
+                    linkElement.textContent = "N/A";
+                }
+    
+            }).catch(function(error) {
+                console.error("ERROR:", error);
+            });
+        }
+    
+        // FUNCTION INVOCATIONS
+        // invoke function when the page loads:
+        lookupCompany();
+    
+        // invoke function when button is clicked:
+        var lookupButton = document.getElementById("lookup");
+        lookupButton.addEventListener("click", lookupCompany, false);
+    
+    </script>
+    
 </body>
 </html>
