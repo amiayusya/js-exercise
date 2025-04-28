@@ -86,6 +86,18 @@
                 console.log("---------------------")
                 console.log("PART 1...")
 
+                console.log("Number of movies:", data.length);
+
+        data.forEach(function(movie) {
+            console.log(⁠ ${movie.title} (${movie.year}) ⁠);
+        });
+
+        var topMovie = data.reduce(function(highest, current) {
+            return (current.rating > highest.rating) ? current : highest;
+        });
+
+        console.log("Top-rated movie:", topMovie.title);
+        console.log("Rating:", topMovie.rating);
 
 
 
@@ -94,6 +106,40 @@
                 console.log("---------------------")
                 console.log("PART 2...")
 
+                var selectElement = document.getElementById("select-movie");
+
+        data.forEach(function(movie) {
+            var option = document.createElement("option");
+            option.value = movie.id;
+            option.textContent = movie.title;
+            selectElement.appendChild(option);
+        });
+
+        function updateMovieInfo() {
+            var selectedId = selectElement.value;
+            var selectedMovie = data.find(function(movie) {
+                return movie.id == selectedId;
+            });
+
+            if (selectedMovie) {
+                document.getElementById("display-title").textContent = selectedMovie.title;
+                document.getElementById("display-year").textContent = selectedMovie.year;
+                document.getElementById("display-rating").textContent = selectedMovie.rating;
+
+                var imageContainer = document.getElementById("image-container");
+                imageContainer.innerHTML = "";
+                var img = document.createElement("img");
+                img.src = selectedMovie.poster_url;
+                img.alt = selectedMovie.title;
+                img.style.maxWidth = "200px";
+                imageContainer.appendChild(img);
+            }
+        }
+
+        selectElement.addEventListener("change", updateMovieInfo);
+
+    })
+    .catch(err => console.log(err));
 
 
 

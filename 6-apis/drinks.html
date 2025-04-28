@@ -73,6 +73,15 @@
             console.log("---------------------")
             console.log("PART 1...")
 
+            var drinks = data.drinks;
+
+
+            console.log("Number of non-alcoholic drinks:", drinks.length);
+
+        
+            drinks.forEach(function(drink) {
+            console.log(⁠ ${drink.strDrink} (ID: ${drink.idDrink}) ⁠);
+        });
 
 
 
@@ -81,9 +90,40 @@
             console.log("PART 2...")
 
 
+            document.getElementById("display-drinks-count").textContent = drinks.length;
+
+        
+        var displayDiv = document.getElementById("display-drinks");
+
+        drinks.forEach(function(drink) {
+           
+            var drinkDiv = document.createElement("div");
+            drinkDiv.style.marginBottom = "10px";
+
+           
+            var p = document.createElement("p");
+            p.textContent = drink.strDrink;
+
+            
+            var img = document.createElement("img");
+            img.src = drink.strDrinkThumb;
+            img.alt = drink.strDrink;
+            img.style.height = "100px";
+
+            
+            drinkDiv.appendChild(p);
+            drinkDiv.appendChild(img);
+
+            
+            displayDiv.appendChild(drinkDiv);
+        });
 
 
-        })
+    })
+    .catch(function(error) {
+        console.error("ERROR:", error);
+    });
+
 
     </script>
 </body>
